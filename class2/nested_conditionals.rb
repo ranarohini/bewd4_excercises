@@ -12,7 +12,7 @@
 
 def get_day
   puts "What day of the week am I thinking of?"
-  user_input = gets.chomp
+  user_input = gets.chomp.downcase
 end
 
 def get_number
