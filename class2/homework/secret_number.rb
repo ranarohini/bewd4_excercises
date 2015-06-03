@@ -6,43 +6,55 @@ def display_rules
 end
 
 def welcome_user
-	puts '###############################################################################'
-	puts '#'
+  puts '###############################################################################'
+  puts '#'
 	puts '# 	SECRET GAME'
 	puts '# Welcome! This game is developed by Rohini Rana'
 	puts '#'
 	puts '###############################################################################'
 	puts "What's your name?"
-	user_name = gets
-	puts "Hi " + user_name + "!"
+	user_name = gets.chomp
+	puts "Hi #{user_name}!"
 end
 
-def get_number
+# gets the input from the user
+def get_input
 	user_input = gets.chomp
   user_input.to_i
 end
 
+# check if the input is valid
+def if_valid(num)
+	if num >= 1 && num <= 10
+		true
+	else
+		false
+	end
+end
+
 secret = 8
-trial = 3
 
 welcome_user
 display_rules
 
-begin
-	if trial == 0 then
+(1..4).each do |trial|
+	if trial == 4 then
 		puts "Sorry! You have lost the game. The Secret number was #{secret}"
 		break
 	else
-		puts "You have #{trial} guesses before the game is over. Enter a number."
-		guess = get_number
-		if guess == secret then
-			puts "CONGRATULATION!!! You have won the game!"
-			break
-		elsif guess > secret then
-				puts "Sorry! Your guessed number is too high."
+		puts 'You have ' + (4 - trial).to_s + ' guesses before the game is over. Enter a number.'
+		guess = if_valid
+		if check_input(guess) then
+			if guess == secret then
+				puts "CONGRATULATION!!! You have won the game!"
+				break
+			elsif guess > secret
+					puts "Sorry! Your guessed number is too high."
+			else
+					puts "Sorry! Your guessed number is too low."
+			end
 		else
-				puts "Sorry! Your guessed number is too low."
+			puts "You must guess a number between 1 to 10."
 		end
 	end
-	trial = trial - 1
-end until trial < 0
+end
