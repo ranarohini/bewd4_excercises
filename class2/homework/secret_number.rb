@@ -43,8 +43,8 @@ display_rules
 		break
 	else
 		puts 'You have ' + (4 - trial).to_s + ' guesses before the game is over. Enter a number.'
-		guess = if_valid
-		if check_input(guess) then
+		guess = get_input
+		if if_valid(guess) then
 			if guess == secret then
 				puts "CONGRATULATION!!! You have won the game!"
 				break
