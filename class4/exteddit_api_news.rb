@@ -47,10 +47,10 @@ end
 
 def process_digg_stories(stories)
   rest_data = RestClient.get('http://digg.com/api/news/popular.json')
-  json_data = JSON.parse(rest_data)
-  data = json_data['data']
-  parsed_data = JSON.parse(data.to_json)
-  news = parsed_data['feed']
+  json_data = JSON.parse(rest_data) #convert string to hash
+  data = json_data['data'] #look for data
+  parsed_data = JSON.parse(data.to_json) # parse again
+  news = parsed_data['feed'] # look for feed
   news.each do |news_story|
     type = []
     news_story['content']['tags'].each do |tag|
