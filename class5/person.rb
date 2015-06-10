@@ -8,15 +8,16 @@ class Person
   attr_accessor :addressses
 
 # ruby calls it automatically when new is called. Class constructor
-  def initialize(name, gender, dob)
-    @addresses = []
+  def initialize(name, gender, dob) #name, gender, dob are method variables
+    @addresses = [] #@addresses, @name... are instance var
     @name = name
     @gender = gender
     @dob = dob
   end
 
-# class method
-  # def self.age_from_dob - class level scope
+# class method - class level scope e.g. Person.age_from_dobs
+  # def self.age_from_dob
+
   def age_from_dob # object level access
     dob_dt = Date.parse(@dob) #object attributes have instance or object level scope
     today = DateTime.now

@@ -2,7 +2,7 @@ require './person'
 
 require './address'
 
-person1 = Person.new('Selina Kyle', 'Female', '03-08-1981') #create object
+person1 = Person.new('Selina Kyle', 'Female', '03-08-1981') #create object, pass values to intialize class method
 # person1.gender = 'Female'
 # person1.dob = '03-08-1981'
 # person1.no_of_dependents = 1
