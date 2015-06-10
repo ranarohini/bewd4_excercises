@@ -18,7 +18,7 @@ def calculate_upvotes(stories)
     elsif story[:title].downcase.include?('bacon')
       story[:upvotes] *= 8
     end
-    if story[:category].include? 'Crime'
+    if story[:category].include? 'Crime' #digg stories' category is an array
       story[:upvotes] *= 3
     end
   end
@@ -47,14 +47,14 @@ end
 
 def process_digg_stories(stories)
   rest_data = RestClient.get('http://digg.com/api/news/popular.json')
-  json_data = JSON.parse(rest_data) #convert string to hash
-  data = json_data['data'] #look for data
+  json_data = JSON.parse(rest_data) #convert json string to hash
+  data = json_data['data']
   parsed_data = JSON.parse(data.to_json) # parse again
-  news = parsed_data['feed'] # look for feed
+  news = parsed_data['feed']
   news.each do |news_story|
     type = []
-    news_story['content']['tags'].each do |tag|
-      type = type.push(tag['display'])
+    news_story['content']['tags'].each do |tag| #tags is an array of hash.
+      type = type.push(tag['display']) # build an array of categories
     end
     story_hash = construct_story_hash(news_story['content']['title_alt'], type , 'Digg')
     stories << story_hash
